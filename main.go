@@ -20,7 +20,13 @@ func httpHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	flag.StringVar(&httpAddr, "http", ":3000", "HTTP listen address")
+	var port = os.Getenv("PORT")
+
+	if port == "" {
+		port = "3000"
+	}
+
+	flag.StringVar(&httpAddr, "http", ":"+port, "HTTP listen address")
 	flag.Parse()
 
 	var err error
